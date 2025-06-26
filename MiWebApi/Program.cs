@@ -13,14 +13,15 @@ response.EnsureSuccessStatusCode();
 
 string responseBody = await response.Content.ReadAsStringAsync();
 Nombre nombre = JsonSerializer.Deserialize<Nombre>(responseBody);
-
+string ruta = "ArchivoJson\\" + nombreIngresado.ToLower() + ".json";
+Archivo.escribirArchivoJson(ruta, responseBody);
 Console.WriteLine("Mostrando resultados:");
-Console.WriteLine($"Nombre ingresado: {nombre.count}\n Cantidad: {nombre.name}\nPosiblles nacionalidades:");
+Console.WriteLine($"Nombre ingresado: {nombre.name}\nContador: {nombre.count}\nPosiblles nacionalidades:");
 //var salida;
 foreach (var country in nombre.country)
 {
     //salida = country.probability.
-    Console.WriteLine($"Identificacion de país: {country.country_id} - Probabilidad: {country.probability}");
+    Console.WriteLine($"Identificacion de país: {country.country_id} - Probabilidad: {country.probability.ToString("N2")}");
 }
 
 Console.WriteLine("Fin del programa.");
